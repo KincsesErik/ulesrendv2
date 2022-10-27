@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -52,8 +57,16 @@ if(isset($_REQUEST['osztalyId'])) {
 </style>
 </head>
 <body>
+    
     <?php
-
+if(isset($_SESSION['id'])){
+    echo "Üdv ".$_SESSION['nev']."!";
+    echo '<a href="belepes.php?kilepes=1">KILÉPÉS</a>';
+}
+else {
+    echo '<a href="belepes.php">BELÉPÉS</a>';
+}
+//
 echo "<h1>$osztalyok[$osztaly]</h1>";
 
 ?>
@@ -93,15 +106,25 @@ if ($result = $db->dbSelect($sql)){
                 $bg = "background-color: yellow;";
             }
         }
-    if($row['sorId'] == $sajatMagam['sorId'] and $sajatMagam['mezoNeve'] == $mezoNev) {
-        echo "<td style=\"color.rgb(101, 1, 252);$bg\">".$nev."</td>\n";
+        //if($row['sorId'] == $sajatMagam['sorId'] and $sajatMagam['mezoNeve'] == $mezoNev) {
+            if (isset($_SESSION['id'])) {
+        if($_SESSION['id'] == $row[$mezoNev]){
+        echo "<td style=\"color.rgb(101, 1, 252);$bg\">".$nev;
     }
-    else echo "<td stlye =\"$bg\">".$nev."</td>\n";
+        else echo "<td stlye =\"$bg\">".$nev;
     }
-    echo "</tr>";
+        else echo "<td stlye =\"$bg\">".$nev;
+        $img = "uploads/".$row[$mezoNev].".jpg";
+        if(file_exists($img)){
+                echo "<br><img src=\"$img\">";
+            }
+            echo "</td>\n";
+        }
+        echo "</tr>";
+    }
+    echo "</table>";
 }
-echo "</table>";
-}
+
 else {
     echo "Nincsenek tanulók ebben az osztályban";
 }
