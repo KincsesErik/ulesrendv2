@@ -1,11 +1,13 @@
-<?php
-    class DataBase{
-        private $servername = "localhost";
-        private $username = "phpteszter";
-        private $password = "7Cx/QtIPg/Zaoftk";
-        private $dbname = "phpteszt"; 
 
-      private $conn;
+<?php
+
+class DataBase{
+    private $servername = "localhost";
+    private $username = "phpteszter";
+    private $password = "7Cx/QtIPg/Zaoftk";
+    private $dbname = "phpteszt"; 
+
+    private $conn;
       
 function __construct() {
 //create connection
