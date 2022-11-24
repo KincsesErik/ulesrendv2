@@ -28,7 +28,7 @@ if(!array_key_exists($osztaly, $osztalyok)) {
     $osztaly = 1;
 }
     
-$sql = "SELECT sorId, nev1, nev2, nev3, nev4, nev5 FROM sorok WHERE osztalyId = ".$osztaly;
+$sql = "SELECT szemelyId, nev, sor, oszlop  FROM szemelyek WHERE osztalyId = ".$osztaly;
 
 $result = $db->dbSelect($sql);
 
