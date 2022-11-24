@@ -29,6 +29,7 @@ if(!array_key_exists($osztaly, $osztalyok)) {
 }
     
 $sql = "SELECT szemelyId, nev, sor, oszlop  FROM szemelyek WHERE osztalyId = ".$osztaly;
+//$sql =."ORDER BY sor ASC, oszlop ASC"
 
 $result = $db->dbSelect($sql);
 
