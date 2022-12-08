@@ -52,6 +52,21 @@ switch ($action) {
         }
         $view = 'view/felhasznalo/lista.php';
     break;
+
+    case 'ajaxkereses':
+        $talalatok = "";
+        if(isset($_GET['keresettNev'])) {
+            if(strlen($_GET['keresettNev']) > 0) {
+            $talalatok = $szemely->nevetKeres($_GET['keresettNev']);
+            }
+        }
+        print_r($talalatok);
+        foreach($talalatok as $key => $val){
+            echo "<a href=\"index.php?szemelyId=".$key."\" class=\"list-group-item list-group-item-action\">".$val."</a>";
+        }
+      
+        exit;
+    break;
 }
 
 

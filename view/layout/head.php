@@ -15,6 +15,23 @@
 }
 body {background-color: rgb(100, 100, 100);}
    </style>
+   <script>
+function showHint(str) {
+  if (str.length == 0) {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("txtHint").innerHTML = this.responseText;
+      }
+    };
+    xmlhttp.open("GET", "index.php?page=felhasznalo&action=ajaxkereses&keresettNev=" + str, true);
+    xmlhttp.send();
+  }
+}
+</script>
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark">
@@ -52,7 +69,8 @@ body {background-color: rgb(100, 100, 100);}
     <form method="post" action="index.php" class="form-inline my-2 my-lg-0">
         <input type ="hidden" name="page" value="felhasznalo">
         <input type ="hidden" name="action" value="kereses">
-        <input type="text" name="keresettNev" class="form-control mr-sm-2" type="search" placeholder="Kit akarsz keresni?" aria-label="Search">
+        <input type="text" name="keresettNev" class="form-control mr-sm-2" type="search" placeholder="Kit akarsz keresni?" aria-label="Search" onkeyup="showHint(this.value)">
+        <div id="txtHint" class="text-white"></div>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">KERESÉS</button>
     </form>
   </div>
